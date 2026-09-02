@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Rechnerische Prüfung der WEG-Jahresabrechnung für Verwaltungsbeiräte. Prüfbericht und Fragenkatalog. Ab 150 Euro aus der Gemeinschaftskasse. Kein Fund, kein Honorar.">
+  <title>Beiratsprüfung der Jahresabrechnung — wir rechnen sie durch</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&amp;family=Source+Sans+3:ital,wght@0,400;0,600;1,400&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #F6F1E8;
+      --ink: #1C1917;
+      --forest: #1F4D3A;
+      --forest-hover: #16382A;
+      --gold: #B8944A;
+      --muted: #57534E;
+      --rule: #E4D9C8;
+      --card: #FFFBF4;
+      --focus: #1F4D3A;
+      --max: 42rem;
+      --wide: 68rem;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { animation: none !important; transition: none !important; }
+    }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Source Sans 3", "Source Sans Pro", system-ui, sans-serif;
+      font-size: 1.0625rem;
+      line-height: 1.6;
+    }
+    h1, h2, h3 {
+      font-family: Fraunces, "Source Serif 4", Georgia, serif;
+      font-weight: 650;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+    }
+    a { color: var(--forest); }
+    a:hover { text-decoration-thickness: 2px; }
+    :focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 3px;
+    }
+    .skip {
+      position: absolute;
+      left: .75rem;
+      top: -3rem;
+      background: var(--forest);
+      color: #fff;
+      padding: .5rem .9rem;
+      z-index: 100;
+      text-decoration: none;
+    }
+    .skip:focus { top: .75rem; }
+    .wrap { width: min(var(--wide), calc(100% - 2rem)); margin-inline: auto; }
+    .narrow { width: min(var(--max), 100%); }
+    header.site {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: color-mix(in srgb, var(--paper) 92%, white);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid transparent;
+    }
+    header.site.is-stuck { border-bottom-color: var(--rule); }
+    .bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: .7rem 0;
+    }
+    .mark {
+      font-family: Fraunces, Georgia, serif;
+      font-weight: 650;
+      color: var(--forest);
+      text-decoration: none;
+      font-size: 1.05rem;
+    }
+    .mark span { display: block; font-family: "Source Sans 3", sans-serif; font-weight: 400; font-size: .72rem; color: var(--muted); letter-spacing: .04em; }
+    nav ul {
+      display: flex;
+      gap: 1.1rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      font-size: .95rem;
+    }
+    nav a { color: var(--ink); text-decoration: none; }
+    nav a:hover { color: var(--forest); }
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: 1px solid var(--ink);
+      color: var(--ink);
+      padding: .35rem .65rem;
+      font: inherit;
+      cursor: pointer;
+    }
+    .hero {
+      padding: 3.2rem 0 3.6rem;
+      border-bottom: 1px solid var(--gold);
+    }
+    .kicker {
+      font-size: .8rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--forest);
+      margin: 0 0 .8rem;
+    }
+    h1 { font-size: clamp(1.85rem, 4vw, 2.65rem); margin: 0 0 1rem; max-width: 18ch; }
+    .lede { font-size: 1.2rem; color: var(--muted); max-width: 38rem; margin: 0 0 1.6rem; }
+    .cta-row { display: flex; flex-wrap: wrap; gap: .7rem; align-items: center; }
+    .btn {
+      display: inline-block;
+      background: var(--forest);
+      color: #fff;
+      text-decoration: none;
+      padding: .75rem 1.15rem;
+      font-weight: 600;
+      border: 1px solid var(--forest);
+    }
+    .btn:hover { background: var(--forest-hover); }
+    .btn.ghost {
+      background: transparent;
+      color: var(--forest);
+    }
+    .hint { font-size: .9rem; color: var(--muted); margin: 1rem 0 0; max-width: 36rem; }
+    section { padding: 3rem 0; border-bottom: 1px solid var(--rule); }
+    h2 { font-size: 1.55rem; margin: 0 0 1.1rem; }
+    h3 { font-size: 1.1rem; margin: 0 0 .4rem; }
+    ol.steps {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 1.25rem;
+    }
+    ol.steps li { display: grid; grid-template-columns: 2.2rem 1fr; gap: .8rem; }
+    .num {
+      font-family: Fraunces, Georgia, serif;
+      color: var(--forest);
+      font-size: 1.4rem;
+      line-height: 1.2;
+    }
+    .rules {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(16.5rem, 1fr));
+      gap: .85rem 1.1rem;
+    }
+    .rules article {
+      background: var(--card);
+      border: 1px solid var(--rule);
+      padding: .85rem .95rem;
+    }
+    .rules small { color: var(--muted); letter-spacing: .04em; }
+    .never {
+      background: var(--card);
+      border-left: 3px solid var(--gold);
+      padding: 1.2rem 1.3rem;
+      max-width: 42rem;
+    }
+    .never ul { margin: .4rem 0 0; padding-left: 1.15rem; }
+    table.prices { width: min(40rem, 100%); border-collapse: collapse; }
+    table.prices th, table.prices td {
+      text-align: left;
+      border-bottom: 1px solid var(--rule);
+      padding: .55rem .35rem;
+      vertical-align: top;
+    }
+    table.prices th { font-weight: 600; }
+    .guarantee {
+      border: 1px solid var(--gold);
+      padding: 1.2rem 1.3rem;
+      max-width: 40rem;
+      background: var(--card);
+    }
+    details {
+      border-bottom: 1px solid var(--rule);
+      padding: .7rem 0;
+    }
+    summary {
+      cursor: pointer;
+      font-weight: 600;
+      list-style: none;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::before { content: "+ "; color: var(--forest); font-weight: 400; }
+    details[open] summary::before { content: "– "; }
+    .season {
+      background: var(--forest);
+      color: #F6F1E8;
+      padding: 2.4rem 0;
+      border-bottom: 0;
+    }
+    .season a { color: #fff; }
+    footer.site {
+      padding: 2.2rem 0 2.8rem;
+      font-size: .88rem;
+      color: var(--muted);
+    }
+    footer.site nav { margin-bottom: .8rem; }
+    footer.site nav a { margin-right: 1rem; color: var(--muted); }
+    .placeholder {
+      font-family: ui-monospace, monospace;
+      font-size: .85em;
+      background: #efe6d6;
+      padding: .05em .3em;
+    }
+    @media (max-width: 760px) {
+      .nav-toggle { display: inline-block; }
+      nav {
+        display: none;
+        position: absolute;
+        left: 0; right: 0;
+        background: var(--paper);
+        border-bottom: 1px solid var(--rule);
+        padding: .4rem 1rem 1rem;
+      }
+      nav.open { display: block; }
+      nav ul { flex-direction: column; gap: .55rem; }
+      h1 { max-width: none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#inhalt">Zum Inhalt springen</a>
+  <header class="site" id="kopf">
+    <div class="wrap bar">
+      <a class="mark" href="#oben">Beiratsprüfung<span>WEG-Jahresabrechnung</span></a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="hauptnav" id="navbtn">Menü</button>
+      <nav id="hauptnav" aria-label="Seitennavigation">
+        <ul>
+          <li><a href="#ablauf">Ablauf</a></li>
+          <li><a href="#pruefung">Was wir prüfen</a></li>
+          <li><a href="#grenze">Was wir nicht tun</a></li>
+          <li><a href="#preise">Preise</a></li>
+          <li><a href="#faq">Fragen</a></li>
+          <li><a href="#upload">Abrechnung senden</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="inhalt">
+    <section class="hero" id="oben">
+      <div class="wrap">
+        <p class="kicker">Für den Verwaltungsbeirat</p>
+        <h1>Sie müssen die Jahresabrechnung prüfen. Wir rechnen sie durch.</h1>
+        <p class="lede">Prüfbericht und Fragenkatalog. Ab 150&nbsp;Euro aus der Gemeinschaftskasse. Kein Fund, kein Honorar.</p>
+        <div class="cta-row">
+          <a class="btn" href="mailto:[KONTAKT-EMAIL]?subject=Jahresabrechnung%20zur%20Einsch%C3%A4tzung&amp;body=Objekt%20%2F%20Adresse%3A%0AEinheiten%3A%0AWirtschaftsjahr%3A%0AVersammlungstermin%3A%0ABeiratsvorsitz%3A%0A%0ABitte%20die%20PDF%20der%20Gesamtabrechnung%20als%20Anhang%20beif%C3%BCgen.%20Keine%20Einzelabrechnungen%20Dritter%20n%C3%B6tig.">Abrechnung senden</a>
+          <a class="btn ghost" href="#upload">So kommt die Datei an</a>
+        </div>
+        <p class="hint">Keine Rechtsberatung. Wir rechnen nach und stellen Fragen. Die Bewertung bleibt beim Beirat — und, wo nötig, beim Anwalt.</p>
+      </div>
+    </section>
+
+    <section id="ablauf">
+      <div class="wrap narrow">
+        <h2>Drei Schritte, dann können Sie vorlesen</h2>
+        <ol class="steps">
+          <li>
+            <span class="num" aria-hidden="true">1</span>
+            <div>
+              <h3>Sie schicken die Abrechnung</h3>
+              <p>PDF der Gesamtabrechnung, wenn vorhanden der Vermögensbericht und der Wirtschaftsplan. Wir sagen Ihnen kostenlos, ob sich eine Prüfung lohnt.</p>
+            </div>
+          </li>
+          <li>
+            <span class="num" aria-hidden="true">2</span>
+            <div>
+              <h3>Wir rechnen vierzehn Punkte durch</h3>
+              <p>Summen, Konten, Schlüssel, Heizkosten, Rücklage, Vergütung. Jede Abweichung mit Rechenweg, den ein Eigentümer mit dem Taschenrechner nachvollziehen kann.</p>
+            </div>
+          </li>
+          <li>
+            <span class="num" aria-hidden="true">3</span>
+            <div>
+              <h3>Sie gehen vorbereitet in die Versammlung</h3>
+              <p>Prüfbericht in verständlicher Sprache, Fragenkatalog an die Verwaltung, Textbaustein für Ihre Stellungnahme nach §&nbsp;29 Abs.&nbsp;2 WEG. Fünf Werktage nach vollständigen Unterlagen.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="pruefung">
+      <div class="wrap">
+        <h2>Was wir prüfen — in Alltagssprache</h2>
+        <p class="narrow" style="margin-top:0;color:var(--muted)">Vierzehn feste Regeln. Keine Fachbegriffe, die Sie in der Versammlung erklären müssten. Die Nummern stehen im Bericht, damit Sie nachschlagen können.</p>
+        <div class="rules">
+          <article><small>R01</small><h3>Geht die Gesamtsumme auf?</h3><p>Die Summe aller Wohnungen muss zur Gesamtabrechnung passen.</p></article>
+          <article><small>R02</small><h3>Stimmen die Konten?</h3><p>Anfang plus Einnahmen minus Ausgaben muss das Ende ergeben — je Konto.</p></article>
+          <article><small>R03</small><h3>Hat jede Position einen Schlüssel?</h3><p>Ohne erkennbaren Verteilerschlüssel bleibt unklar, wer welchen Anteil trägt.</p></article>
+          <article><small>R04</small><h3>Ist der Schlüssel wie im Vorjahr?</h3><p>Stille Änderungen fallen sonst nie auf.</p></article>
+          <article><small>R05</small><h3>Addieren sich die Anteile?</h3><p>Die Miteigentumsanteile müssen zur Teilungserklärung passen.</p></article>
+          <article><small>R06</small><h3>Heizung nach Verbrauch?</h3><p>Zwischen 50 und 70 Prozent der Heizkosten müssen nach Verbrauch verteilt sein.</p></article>
+          <article><small>R07</small><h3>Ist die Rücklage schlüssig?</h3><p>Zuführung, Entnahme und Bestand müssen zusammenpassen.</p></article>
+          <article><small>R08</small><h3>Steht bei Entnahmen ein Beschluss?</h3><p>Jede Entnahme aus der Rücklage braucht einen erkennbaren Bezug.</p></article>
+          <article><small>R09</small><h3>Große Sprünge erklärt?</h3><p>Positionen, die über 20 Prozent über dem Vorjahr liegen, brauchen eine Erläuterung.</p></article>
+          <article><small>R10</small><h3>Passt die Verwaltervergütung?</h3><p>Ausgewiesene Vergütung gegen den Vertrag gehalten.</p></article>
+          <article><small>R11</small><h3>Sonderumlagen getrennt?</h3><p>Sonderumlagen dürfen nicht in den laufenden Kosten verschwinden.</p></article>
+          <article><small>R12</small><h3>Nichts doppelt gebucht?</h3><p>Instandhaltung nicht zugleich als Ausgabe und als Rücklage erfasst.</p></article>
+          <article><small>R13</small><h3>Liegt der Vermögensbericht vor?</h3><p>Und stimmt der ausgewiesene Rücklagenbestand mit der Abrechnung überein.</p></article>
+          <article><small>R14</small><h3>Ist die Spitze ausgewiesen?</h3><p>Die Abrechnungsspitze muss als eigener Betrag stehen — darüber beschließt die Versammlung.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="grenze">
+      <div class="wrap">
+        <h2>Was wir niemals tun</h2>
+        <div class="never">
+          <ul>
+            <li>Keine Rechtsberatung, keine Rechtsprüfung, keine Aussage zur Genehmigungsfähigkeit.</li>
+            <li>Kein Einwendungsschreiben, keine Vorbereitung einer Anfechtung, keine Empfehlung, wie Sie abstimmen.</li>
+            <li>Kein Vorwurf an die Verwaltung. Wir stellen Fragen, die ein sorgfältiger Verwalter gern beantwortet.</li>
+            <li>Keine Auswertung der Einzelabrechnungen anderer Eigentümer — nur deren Summe.</li>
+            <li>Kein automatischer Versand. Sie sehen den Bericht, Sie geben frei, Sie entscheiden, was an die Verwaltung geht.</li>
+          </ul>
+          <p>Was wir feststellen, lautet immer so: Zahl, Rechenweg, Bitte um Erläuterung. Die rechtliche Bewertung obliegt einem Rechtsanwalt. Die Entscheidung obliegt dem Beirat und der Versammlung.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="preise">
+      <div class="wrap">
+        <h2>Preise, brutto, aus der Gemeinschaftskasse</h2>
+        <table class="prices">
+          <thead>
+            <tr><th>Paket</th><th>Einheiten</th><th>Preis</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Beiratsprüfung S</td><td>bis 30</td><td>150&nbsp;€</td></tr>
+            <tr><td>Beiratsprüfung M</td><td>31–60</td><td>250&nbsp;€</td></tr>
+            <tr><td>Beiratsprüfung L</td><td>61–120 oder mehrere Wirtschaftseinheiten</td><td>390&nbsp;€</td></tr>
+            <tr><td>Vermögensbericht</td><td>Prüfung nach §&nbsp;28 Abs.&nbsp;4 WEG</td><td>+40&nbsp;€</td></tr>
+            <tr><td>Folgejahr</td><td>Schlüssel und Vorjahr stehen</td><td>−50&nbsp;€</td></tr>
+          </tbody>
+        </table>
+        <p class="hint">Auftraggeberin ist die Gemeinschaft, vertreten durch den Beirat. Die Beschlussvorlage zur Kostenübernahme liegt bei. Unter 15 Einheiten nehmen wir nicht an.</p>
+        <div class="guarantee" id="garantie" style="margin-top:1.4rem">
+          <h3>Erfolgsgarantie</h3>
+          <p>Finden wir keine prüfrelevante Beanstandung, stellen wir nichts in Rechnung. Sie behalten den dokumentierten Prüfbericht für Ihre Stellungnahme.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="wrap narrow">
+        <h2>Fünf Einwände, ehrlich beantwortet</h2>
+        <details>
+          <summary>„Dafür haben wir doch den Verwalter.“</summary>
+          <p>Der Verwalter erstellt die Abrechnung. Er kann sie nicht selbst prüfen — genau deshalb schreibt das Gesetz die Prüfung durch den Beirat vor.</p>
+        </details>
+        <details>
+          <summary>„Wer soll das bezahlen?“</summary>
+          <p>Die Gemeinschaft. Die Beschlussvorlage liefern wir mit. Bei 30 Einheiten sind das rund 5&nbsp;Euro je Eigentümer.</p>
+        </details>
+        <details>
+          <summary>„Wir haften doch gar nicht, das ist ehrenamtlich.“</summary>
+          <p>Für einfache Fahrlässigkeit ist die Haftung gemildert. Für grobe nicht. Und „wir haben geprüft“, ohne geprüft zu haben, ist genau der Fall, über den dann gestritten wird. Die Pflicht zur Prüfung besteht unabhängig von der Haftung.</p>
+        </details>
+        <details>
+          <summary>„Was, wenn Sie nichts finden?“</summary>
+          <p>Dann zahlen Sie nichts. Und Sie haben eine dokumentierte Prüfung für Ihre Stellungnahme.</p>
+        </details>
+        <details>
+          <summary>„Können wir damit die Abrechnung anfechten?“</summary>
+          <p>Nein. Das ist Anwaltssache und ausdrücklich nicht unsere Leistung. Wir liefern die Zahlen, auf die ein Anwalt aufsetzen könnte.</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="season" id="saison">
+      <div class="wrap narrow">
+        <h2 style="color:#F6F1E8">Saison: Februar bis Juni</h2>
+        <p>Jahresabrechnungen laufen geballt. Wer im März mehr zusagt, als er im April schafft, verliert den Ruf, nicht nur einen Auftrag. Schicken Sie die Unterlagen, sobald sie da sind — nicht in der Woche vor der Versammlung.</p>
+      </div>
+    </section>
+
+    <section id="upload">
+      <div class="wrap narrow">
+        <h2>Abrechnung hochladen</h2>
+        <p>Der Parser läuft getrennt. Heute reicht die Datei per E-Mail oder als Ablage im vereinbarten Ordner.</p>
+        <ol>
+          <li>Schicken Sie die PDF an <span class="placeholder">[KONTAKT-EMAIL]</span> — Betreff: „Jahresabrechnung zur Einschätzung“.</li>
+          <li>Oder legen Sie die Datei im Drive-Ordner <strong>80_Inbox_Abrechnungen</strong> ab, wenn wir Ihnen den Zugang eingerichtet haben.</li>
+        </ol>
+        <p>Bitte beilegen: Gesamtabrechnung, Vermögensbericht falls vorhanden, Wirtschaftsplan, Verwaltervertrag (Vergütung), Vorjahresabrechnung wenn zur Hand, Versammlungstermin.</p>
+        <p class="hint">Keine Einzelabrechnungen anderer Eigentümer. Keine Zugangsdaten zum Verwalterportal. AVV vor der ersten Datenübergabe, sobald ein Auftrag zustande kommt.</p>
+        <p><a class="btn" href="mailto:[KONTAKT-EMAIL]?subject=Jahresabrechnung%20zur%20Einsch%C3%A4tzung">E-Mail öffnen</a></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">
+      <nav aria-label="Rechtliches">
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+        <a href="datenschutz.html#avv">AVV-Hinweis</a>
+      </nav>
+      <p>Rechnerische und kaufmännische Durchsicht. Keine Rechtsdienstleistung. Stand 2.&nbsp;September 2026 · PL-02</p>
+      <p>Impressum: <span class="placeholder">[IMPRESSUM]</span> · Kontakt: <span class="placeholder">[KONTAKT-EMAIL]</span></p>
+    </div>
+  </footer>
+  <script>
+    (function () {
+      var btn = document.getElementById("navbtn");
+      var nav = document.getElementById("hauptnav");
+      var head = document.getElementById("kopf");
+      if (btn && nav) {
+        btn.addEventListener("click", function () {
+          var open = nav.classList.toggle("open");
+          btn.setAttribute("aria-expanded", open ? "true" : "false");
+        });
+        nav.querySelectorAll("a").forEach(function (a) {
+          a.addEventListener("click", function () {
+            nav.classList.remove("open");
+            btn.setAttribute("aria-expanded", "false");
+          });
+        });
+      }
+      if (head) {
+        var onScroll = function () {
+          head.classList.toggle("is-stuck", window.scrollY > 8);
+        };
+        window.addEventListener("scroll", onScroll, { passive: true });
+        onScroll();
+      }
+    })();
+  </script>
+</body>
+</html>
