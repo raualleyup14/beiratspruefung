@@ -11,15 +11,16 @@
     :root { --paper:#F6F1E8; --ink:#1C1917; --forest:#1F4D3A; --gold:#B8944A; --muted:#57534E; }
     body { margin:0; background:var(--paper); color:var(--ink); font:1.05rem/1.6 "Source Sans 3", system-ui, sans-serif; }
     h1 { font-family:Fraunces, Georgia, serif; font-size:1.8rem; }
+    h2 { font-family:Fraunces, Georgia, serif; font-size:1.15rem; }
     main { width:min(40rem, calc(100% - 2rem)); margin:2.5rem auto 4rem; }
     a { color:var(--forest); }
     :focus-visible { outline:2px solid var(--forest); outline-offset:3px; }
-    .ph { font-family:ui-monospace, monospace; background:#efe6d6; padding:.05em .3em; }
     header { border-bottom:1px solid var(--gold); padding:1rem 0; }
+    address { font-style:normal; }
   </style>
 </head>
 <body>
-  <a href="index.html" style="position:absolute;left:.75rem;top:-3rem" class="skip">Zur Startseite</a>
+  <a href="index.html" style="position:absolute;left:.75rem;top:-3rem">Zur Startseite</a>
   <header>
     <main style="margin:0 auto;padding:.2rem 0">
       <a href="index.html">← Zur Startseite</a>
@@ -27,19 +28,22 @@
   </header>
   <main id="impressum">
     <h1>Impressum</h1>
-    <p>Angaben gemäß § 5 DDG (vormals TMG). Platzhalter — vor Veröffentlichung ersetzen.</p>
+    <p>Angaben gemäß § 5 DDG</p>
+    <address>
+      Konstantin Rau<br>
+      handelnd unter „Alley-Up“<br>
+      Lehlestr. 34<br>
+      74219 Möckmühl
+    </address>
     <p>
-      <span class="ph">[IMPRESSUM]</span><br>
-      Name / Firma: <span class="ph">[NAME]</span><br>
-      Anschrift: <span class="ph">[STRASSE NR., PLZ ORT]</span><br>
-      E-Mail: <span class="ph">[KONTAKT-EMAIL]</span><br>
-      Telefon: <span class="ph">[TELEFON]</span><br>
-      USt-IdNr.: <span class="ph">[DE…]</span>
+      Telefon: <a href="tel:+4915116519435">+49 151 16519435</a><br>
+      E-Mail: <a href="mailto:Konstantin.rau14@gmail.com">Konstantin.rau14@gmail.com</a>
     </p>
-    <p>Verantwortlich für den Inhalt: <span class="ph">[NAME]</span>.</p>
-    <h2 style="font-family:Fraunces,Georgia,serif;font-size:1.15rem">Leistungskennzeichnung</h2>
+    <p>Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG: DE369982873</p>
+    <p>Verantwortlich für den Inhalt: Konstantin Rau.</p>
+    <h2>Leistungskennzeichnung</h2>
     <p>Diese Website beschreibt eine rechnerische und kaufmännische Durchsicht von WEG-Jahresabrechnungen für Verwaltungsbeiräte. Es handelt sich nicht um eine Rechtsdienstleistung im Sinne des Rechtsdienstleistungsgesetzes. Keine Beratung zu Beschlüssen, Fristen oder Rechtsbehelfen.</p>
-    <p>Streitbeilegung: Wir sind nicht verpflichtet und nicht bereit, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen. <span class="ph">[prüfe vor Go-Live]</span></p>
+    <p>Streitbeilegung: Wir sind nicht verpflichtet und nicht bereit, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen. Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung bereit: <a href="https://ec.europa.eu/consumers/odr" rel="noopener">https://ec.europa.eu/consumers/odr</a>.</p>
   </main>
 </body>
 </html>
