@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="description" content="Rechnerische Prüfung der WEG-Jahresabrechnung für Verwaltungsbeiräte. Prüfbericht und Fragenkatalog. Ab 150 Euro aus der Gemeinschaftskasse. Kein Fund, kein Honorar.">
   <title>Beiratsprüfung der Jahresabrechnung — wir rechnen sie durch</title>
   <link rel="stylesheet" href="fonts.css">
@@ -57,8 +57,16 @@
       text-decoration: none;
     }
     .skip:focus { top: .75rem; }
-    .wrap { width: min(var(--wide), calc(100% - 2rem)); margin-inline: auto; }
-    .narrow { width: min(var(--max), 100%); }
+    html { overflow-x: clip; }
+    .wrap {
+      width: min(var(--wide), calc(100% - 2.5rem));
+      margin-inline: auto;
+    }
+    .narrow,
+    .wrap.narrow {
+      width: min(var(--max), calc(100% - 2.5rem));
+      margin-inline: auto;
+    }
     header.site {
       position: sticky;
       top: 0;
@@ -259,6 +267,13 @@
       padding: .05em .3em;
     }
     @media (max-width: 760px) {
+      .wrap,
+      .narrow,
+      .wrap.narrow {
+        width: calc(100% - 2.5rem);
+      }
+      section { padding: 2.2rem 0; }
+      .hero { padding: 2.1rem 0 2.3rem; }
       .nav-toggle { display: inline-block; }
       nav {
         display: none;
@@ -266,11 +281,25 @@
         left: 0; right: 0;
         background: var(--paper);
         border-bottom: 1px solid var(--rule);
-        padding: .4rem 1rem 1rem;
+        padding: .75rem 1.25rem 1.1rem;
       }
       nav.open { display: block; }
       nav ul { flex-direction: column; gap: .55rem; }
       h1 { max-width: none; }
+      .cta-row .btn,
+      #uploadform .btn {
+        width: 100%;
+        text-align: center;
+      }
+      #uploadform .field input { max-width: none; }
+      table.prices {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .never, .guarantee { padding: 1rem 1.05rem; }
+      footer.site { padding: 1.8rem 0 2.4rem; }
     }
   </style>
 </head>
