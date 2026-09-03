@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Rechnerische Prüfung der WEG-Jahresabrechnung für Verwaltungsbeiräte. Prüfbericht und Fragenkatalog. Ab 150 Euro aus der Gemeinschaftskasse. Kein Fund, kein Honorar.">
   <title>Beiratsprüfung der Jahresabrechnung — wir rechnen sie durch</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&amp;family=Source+Sans+3:ital,wght@0,400;0,600;1,400&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="fonts.css">
   <style>
     :root {
       --paper: #F6F1E8;
@@ -131,6 +129,52 @@
     .btn.ghost {
       background: transparent;
       color: var(--forest);
+    }
+    button.btn {
+      font: inherit;
+      cursor: pointer;
+      border: 1px solid var(--forest);
+    }
+    button.btn:disabled {
+      opacity: .7;
+      cursor: wait;
+    }
+    .file-visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    #uploadform .field { margin: 0 0 .9rem; }
+    #uploadform .field label {
+      display: block;
+      font-size: .9rem;
+      color: var(--muted);
+      margin-bottom: .25rem;
+    }
+    #uploadform .field input {
+      width: 100%;
+      max-width: 24rem;
+      padding: .5rem .65rem;
+      border: 1px solid var(--rule);
+      background: var(--card);
+      color: var(--ink);
+      font: inherit;
+    }
+    #uploadform .filenames {
+      font-size: .9rem;
+      color: var(--muted);
+      margin: .6rem 0 0;
+    }
+    #uploadform .status {
+      font-size: .95rem;
+      margin: .7rem 0 0;
+      min-height: 1.4em;
     }
     .hint { font-size: .9rem; color: var(--muted); margin: 1rem 0 0; max-width: 36rem; }
     section { padding: 3rem 0; border-bottom: 1px solid var(--rule); }
@@ -390,14 +434,33 @@
     <section id="upload">
       <div class="wrap narrow">
         <h2>Abrechnung hochladen</h2>
-        <p>Der Parser läuft getrennt. Heute reicht die Datei per E-Mail oder als Ablage im vereinbarten Ordner.</p>
-        <ol>
-          <li>Schicken Sie die PDF an <a href="mailto:Konstantin.rau14@gmail.com">Konstantin.rau14@gmail.com</a> — Betreff: „Jahresabrechnung zur Einschätzung“.</li>
-          <li>Oder legen Sie die Datei im Drive-Ordner <strong>80_Inbox_Abrechnungen</strong> ab, wenn wir Ihnen den Zugang eingerichtet haben.</li>
-        </ol>
+        <p>Unterlagen als PDF hochladen oder per E-Mail schicken.</p>
+        <form id="uploadform" action="https://formsubmit.co/ajax/Konstantin.rau14@gmail.com" method="POST" enctype="multipart/form-data">
+          <input type="hidden" name="_subject" value="Jahresabrechnung zur Einschätzung">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
+          <p class="field">
+            <label for="up-name">Name (optional)</label>
+            <input type="text" id="up-name" name="name" autocomplete="name">
+          </p>
+          <p class="field">
+            <label for="up-email">Ihre E-Mail (optional)</label>
+            <input type="email" id="up-email" name="email" autocomplete="email">
+          </p>
+          <p class="field">
+            <label for="up-note">Versammlungstermin (optional)</label>
+            <input type="text" id="up-note" name="note" autocomplete="off">
+          </p>
+          <input class="file-visually-hidden" type="file" id="abrechnung" name="abrechnung[]" accept="application/pdf" multiple required>
+          <div class="cta-row">
+            <button class="btn" type="button" id="uploadbtn">Abrechnung hochladen</button>
+            <a class="btn ghost" href="mailto:Konstantin.rau14@gmail.com?subject=Jahresabrechnung%20zur%20Einsch%C3%A4tzung">Per E-Mail senden</a>
+          </div>
+          <p class="filenames" id="uploadfiles" hidden></p>
+          <p class="status" id="uploadstatus" role="status" aria-live="polite"></p>
+        </form>
         <p>Bitte beilegen: Gesamtabrechnung, Vermögensbericht falls vorhanden, Wirtschaftsplan, Verwaltervertrag (Vergütung), Vorjahresabrechnung wenn zur Hand, Versammlungstermin.</p>
-        <p class="hint">Keine Einzelabrechnungen anderer Eigentümer. Keine Zugangsdaten zum Verwalterportal. AVV vor der ersten Datenübergabe, sobald ein Auftrag zustande kommt.</p>
-        <p><a class="btn" href="mailto:Konstantin.rau14@gmail.com?subject=Jahresabrechnung%20zur%20Einsch%C3%A4tzung">E-Mail öffnen</a></p>
+        <p class="hint">Keine Einzelabrechnungen anderer Eigentümer. Keine Zugangsdaten zum Verwalterportal. AVV bevor ein Auftrag läuft.</p>
       </div>
     </section>
   </main>
@@ -409,7 +472,7 @@
         <a href="datenschutz.html">Datenschutz</a>
         <a href="datenschutz.html#avv">AVV-Hinweis</a>
       </nav>
-      <p>Rechnerische und kaufmännische Durchsicht. Keine Rechtsdienstleistung. Stand 2.&nbsp;September 2026 · PL-02</p>
+      <p>Rechnerische und kaufmännische Durchsicht. Keine Rechtsdienstleistung. Stand 3.&nbsp;September 2026</p>
       <p>Konstantin Rau, handelnd unter Alley-Up · <a href="mailto:Konstantin.rau14@gmail.com">Konstantin.rau14@gmail.com</a></p>
     </div>
   </footer>
@@ -437,6 +500,72 @@
         window.addEventListener("scroll", onScroll, { passive: true });
         onScroll();
       }
+    })();
+    (function () {
+      var form = document.getElementById("uploadform");
+      var fileInput = document.getElementById("abrechnung");
+      var uploadBtn = document.getElementById("uploadbtn");
+      var statusEl = document.getElementById("uploadstatus");
+      var filesEl = document.getElementById("uploadfiles");
+      if (!form || !fileInput || !uploadBtn) return;
+      function setStatus(msg) {
+        if (statusEl) statusEl.textContent = msg || "";
+      }
+      function listNames(files) {
+        if (!filesEl) return;
+        var names = [];
+        if (files && files.length) {
+          for (var i = 0; i < files.length; i++) names.push(files[i].name);
+        }
+        filesEl.hidden = names.length === 0;
+        filesEl.textContent = names.join(", ");
+      }
+      function send() {
+        if (!fileInput.files || !fileInput.files.length) return;
+        setStatus("Senden…");
+        uploadBtn.disabled = true;
+        var data = new FormData(form);
+        fetch("https://formsubmit.co/ajax/Konstantin.rau14@gmail.com", {
+          method: "POST",
+          body: data,
+          headers: { Accept: "application/json" }
+        }).then(function (res) {
+          return res.json().then(function (body) {
+            return { ok: res.ok, body: body };
+          }, function () {
+            return { ok: res.ok, body: null };
+          });
+        }).then(function (result) {
+          var success = result.body && (result.body.success === true || result.body.success === "true");
+          if (success || (result.ok && result.body && result.body.success !== false && result.body.success !== "false")) {
+            setStatus("Angekommen, wir schauen uns die Datei an.");
+            form.reset();
+            listNames([]);
+          } else {
+            setStatus("Fehler, bitte per E-Mail.");
+          }
+        }).catch(function () {
+          setStatus("Fehler, bitte per E-Mail.");
+        }).then(function () {
+          uploadBtn.disabled = false;
+        });
+      }
+      uploadBtn.addEventListener("click", function () {
+        fileInput.click();
+      });
+      fileInput.addEventListener("change", function () {
+        if (!fileInput.files || !fileInput.files.length) return;
+        listNames(fileInput.files);
+        send();
+      });
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        if (!fileInput.files || !fileInput.files.length) {
+          fileInput.click();
+          return;
+        }
+        send();
+      });
     })();
   </script>
 </body>
